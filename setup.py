@@ -13,5 +13,5 @@ setup(name='edopi',
     author_email='luansimoes@id.uff.br',
     keywords='Pacote',
     description='Pacote PyPI para musica microtonal',
-    packages=['edopi.domain'],
+    packages=find_packages(include=['edopi', 'edopi.*']),
     install_requires=['numpy','matplotlib'],)
