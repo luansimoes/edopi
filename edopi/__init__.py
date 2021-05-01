@@ -1,1 +1,1 @@
-from domain import TonalSystem, Scale, GCycle, BalzanoDiagram, TonalSystemElement
+from .domain import TonalSystem, Scale, GCycle, BalzanoDiagram, TonalSystemElement
