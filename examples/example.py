@@ -1,4 +1,4 @@
-from domain import TonalSystem, Scale, transpose_to_octave
+from edopi import TonalSystem, Scale, transpose_to_octave
 from scamp import Session
 import random as rd
 

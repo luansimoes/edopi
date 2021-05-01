@@ -1,4 +1,4 @@
-from domain import TonalSystem
+from edopi import TonalSystem
 
 system = TonalSystem(27)
 generators = system.get_generators()

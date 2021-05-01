@@ -1,4 +1,4 @@
-from domain import TonalSystem
+from edopi import TonalSystem
 
 system = TonalSystem(28, 15)
 scale = system.diatonic_scale()
