@@ -1,1 +1,1 @@
-# EDO-pi: A Group-Theoretic library for microtonal musical structures
+# EDO-pi: A Group-Theoretic Library for Microtonal Musical Structures
