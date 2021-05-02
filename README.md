@@ -1,1 +1,1 @@
-# EDO-pi: a python library for 
+# EDO-pi: A Group-Theoretic library for microtonal musical structures
