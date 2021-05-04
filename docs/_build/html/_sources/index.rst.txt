@@ -3,7 +3,7 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-EDO`pi` - A Python Library for Group-Theoretic Microtonal Music Structures
+EDO:math:`pi` - A Python Library for Group-Theoretic Microtonal Music Structures
 ==========================================================================
 
 `Source Code <https://github.com/luansimoes/edopi>`_ |
@@ -11,7 +11,7 @@ EDO`pi` - A Python Library for Group-Theoretic Microtonal Music Structures
 
 Our description... (soon)
 
-Please check the tutorial examples for basic usage of EDO`pi`: <https://github.com/luansimoes/edopi/tree/master/examples> _.
+Please check the tutorial examples for basic usage of EDO:math:`pi`: <https://github.com/luansimoes/edopi/tree/master/examples> _.
 
 .. toctree::
    :maxdepth: 2
