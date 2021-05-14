@@ -11,7 +11,7 @@ EDOpi - A Python Library for Group-Theoretic Microtonal Music Structures
 
 Our description... (soon)
 
-Please check the tutorial examples for basic usage of EDOpi: <https://github.com/luansimoes/edopi/tree/master/examples>__.
+Please check the tutorial examples for basic usage of EDOpi: `Examples <https://github.com/luansimoes/edopi/tree/master/examples>`_.
 
 .. toctree::
    :maxdepth: 2
