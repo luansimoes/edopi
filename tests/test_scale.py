@@ -1,11 +1,10 @@
 import unittest
 
-from domain import TonalSystemElement, Scale, TonalSystem
+from edopi import TonalSystemElement, Scale, TonalSystem
 
 
 class TestScale(unittest.TestCase):
 
-    # preparacenario
     def setUp(self):
         diatonic = (2, 2, 1, 2, 2, 2, 1)
         self.s1 = Scale(12, diatonic, name="12-Pitch Diatonic Major Scale")
@@ -28,8 +27,8 @@ class TestScale(unittest.TestCase):
         self.assertEqual(re.pitch_class, self.s1.next(0, 1))
 
     def test_export_scala_files(self):
-        f = open('scala_files/z12_7_test.scl', 'r')
-        f2 = open('scala_files/z12_7_test.kbm', 'r')
+        f = open('tests/test_files/z12_7_test.scl', 'r')
+        f2 = open('tests/test_files/z12_7_test.kbm', 'r')
         content = f.read()
         content2 = f2.read()
 

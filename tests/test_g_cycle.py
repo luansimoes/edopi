@@ -1,6 +1,6 @@
 import  unittest
 
-from domain import GCycle, TonalSystemElement, Scale
+from edopi import GCycle, TonalSystemElement, Scale
 
 
 class TestGCycle(unittest.TestCase):

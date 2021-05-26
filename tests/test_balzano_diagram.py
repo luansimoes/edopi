@@ -1,9 +1,8 @@
 import  unittest
-from domain import TonalSystemElement, BalzanoDiagram, Scale
+from edopi import TonalSystemElement, BalzanoDiagram, Scale
 
 class TestBalzanoDiagram(unittest.TestCase):
-
-    #preparacenario    
+   
     def setUp(self):
         self.b1 = BalzanoDiagram(12, TonalSystemElement(3,12), TonalSystemElement(4, 12))
         self.b2 = BalzanoDiagram(12, TonalSystemElement(2,12), TonalSystemElement(5,12))

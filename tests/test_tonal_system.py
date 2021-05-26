@@ -1,9 +1,8 @@
 import  unittest
-from domain import TonalSystem, TonalSystemElement, Scale
+from edopi import TonalSystem, TonalSystemElement, Scale
 
 class TestTonalSystem(unittest.TestCase):
-    
-    #preparacenario    
+        
     def setUp(self):
         self.t1 = TonalSystem(12)
         self.diatonic_values = [0, 2, 4, 5, 7, 9, 11]

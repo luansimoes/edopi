@@ -1,5 +1,5 @@
 import  unittest
-from domain import TonalSystemElement
+from edopi import TonalSystemElement
 
 class TestTonalSystemElement(unittest.TestCase):
 
