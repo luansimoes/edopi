@@ -1,6 +1,18 @@
 import math
 
 class TonalSystemElement:
+    """
+    Instantiate a Tonal System Element.
+    Elements must have a chroma defined in a System. 
+    The System's cardinality acts as a module when operating microtonal chromas.
+    
+    :param pitch: A value that will be transformed into a chroma.
+    :type pitch: int
+
+    :param module: The cardinality of the System.
+    :type module: int
+    """
+
     def __init__(self, pitch: int, module: int):
         self.pitch_class = pitch % module
         self.module = module

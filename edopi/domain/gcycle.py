@@ -6,6 +6,15 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 class GCycle:
+    """
+    Instantiate a G-Cycle of the Tonal System.
+    A G-Cycle is a generalized Cycle of Fifths - which is isomorph to the Group.
+    There's no need to interact directly with this class
+    
+    :param generator: The generator of the Cycle.
+    :type g: TonalSystemElement
+    """
+
     def __init__(self, generator: TonalSystemElement):
         assert generator.is_generator(), 'GCycle must be initialized with a element that is a generator of the given system'
         self.generator = generator
@@ -35,6 +44,7 @@ class GCycle:
 
         return Scale(self.generator.module, struct, tonic=tonic, name="Diatonic Scale")
 
+    # TODO: return integer if elem is an integer
     def next(self, elem: Union[TonalSystemElement, int], steps: int):
         real_elem = TonalSystemElement(elem, self.generator.module) if isinstance(elem, int) else elem
         next_index = (self.elements.index(real_elem) + steps) % len(self.elements)

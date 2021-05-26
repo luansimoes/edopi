@@ -6,6 +6,18 @@ from typing import Union
 import math
 
 class TonalSystem:
+    """
+    Instantiate a Tonal System.
+    A Tonal System is a group of n elements and it has a generator chosen as a generalized fifth. 
+    All the other structures are defined within a Tonal System.
+    
+    :param n: The number of elements.
+    :type n: int
+
+    :param g: The generalized fifth of the System.
+    :type g: int
+    """
+
     def __init__(self, n: int, g=1):
         assert n>1, "Tonal System must have more than one element"
         self.cardinality = n

@@ -7,6 +7,23 @@ import matplotlib.patches as patches
 
 
 class Scale:
+    """
+    Instantiate a Scale.
+    A Scale is an ordered collection of elements, starting and ending at the same element, called tonic. 
+    It is defined by an interval struct within a Tonal System.
+    
+    :param system_size: The number of elements of the system.
+    :type system_size: int
+
+    :param interval_struct: The pattern of intervals that generates the scale.
+    :type interval_struct: tuple
+
+    :param tonic: the first element of the scale.
+    :type tonic: int
+
+    :param name: The name of the scale.
+    :type name: str
+    """
     def __init__(self, system_size: int, interval_struct: tuple, tonic=0, name="Generic Scale"):
         self.system_size = system_size
         self.interval_struct = interval_struct
@@ -27,7 +44,7 @@ class Scale:
         self.tonic = tonic
         self.elements = self.build_elements(tonic)
 
-    # TODO central_note
+    # TODO use central note if element doesnt belong to scale
     def next(self, elem: int, steps: int):
         if isinstance(elem, int):
             real_elem = TonalSystemElement(elem, self.system_size)
