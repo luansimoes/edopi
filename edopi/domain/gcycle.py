@@ -9,7 +9,7 @@ class GCycle:
     """
     Instantiate a G-Cycle of the Tonal System.
     A G-Cycle is a generalized Cycle of Fifths - which is isomorph to the Group.
-    There's no need to interact directly with this class
+    There's no need to interact directly with this class.
     
     :param generator: The generator of the Cycle.
     :type g: TonalSystemElement

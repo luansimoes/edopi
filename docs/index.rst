@@ -26,8 +26,12 @@ Installation
 
 .. toctree::
    :maxdepth: 2
-   :caption: Python API:
+   :caption: API Reference:
 
+   source/api/tonal_system
+   source/api/scale
+   source/api/gcycle
+   source/api/balzano_diagram
    source/api/tonal_system_element
 
 Indices and tables

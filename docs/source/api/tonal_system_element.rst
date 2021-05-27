@@ -2,7 +2,7 @@
 TonalSystemElement
 ===================
 
-.. currentmodule:: edopi.tonal_system_element
+.. currentmodule:: edopi.TonalSystemElement
 
 .. autoclass:: edopi.TonalSystemElement
     :members:

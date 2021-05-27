@@ -6,7 +6,7 @@ import numpy as np
 class BalzanoDiagram:
     """
     Instantiate a Balzano Diagram for visualization.
-    A Balzano Diagram is a 2D representation of a Tonal System
+    A Balzano Diagram is a 2D representation of a Tonal System.
     It is generated from two elements x and y, such as x+y is equal to the generator of the System. 
     
     :param system_size: The number of elements of the system.
