@@ -18,8 +18,8 @@ class GCycle:
     def __init__(self, generator: TonalSystemElement):
         assert generator.is_generator(), 'GCycle must be initialized with a element that is a generator of the given system'
         self.generator = generator
-        self.elements = self.generate_cycle()
         self.system_size = self.generator.module
+        self.elements = self.generate_cycle()
         #self.scale_sizes = sorted([self.generator.inverse().pitch_class, self.generator.inverse().symmetrical().pitch_class])
 
     def generate_cycle(self):
