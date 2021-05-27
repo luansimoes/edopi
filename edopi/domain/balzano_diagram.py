@@ -20,8 +20,9 @@ class BalzanoDiagram:
     """
     def __init__(self, system_size: int, x: TonalSystemElement, y: TonalSystemElement):
         self.system_size = system_size
+        self.generator = x+y
         self.thirds = (x, y)
-        self.scale = GCycle(x+y).diatonic_scale(0)
+        self.scale = GCycle(self.generator).diatonic_scale(0)
         self.matrix = self.build_matrix(system_size, x, y)
         self.compact_matrix = self.build_compact_matrix(system_size, x, y)
         self.dims = (len(self.matrix), len(self.matrix[0]))

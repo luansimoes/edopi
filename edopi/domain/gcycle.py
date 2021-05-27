@@ -1,5 +1,5 @@
 from .tonal_system_element import TonalSystemElement
-from .scale import Scale
+from .scale import DiatonicScale
 from typing import Union
 import copy
 import numpy as np
@@ -42,7 +42,7 @@ class GCycle:
 
         struct = tuple((sc_elements[i]-sc_elements[i-1]).pitch_class for i in range(1, len(sc_elements)))
 
-        return Scale(self.generator.module, struct, tonic=tonic, name="Diatonic Scale")
+        return DiatonicScale(self.generator.module, struct, self.generator, tonic=tonic, name="Diatonic Scale")
 
     # TODO: return integer if elem is an integer
     def next(self, elem: Union[TonalSystemElement, int], steps: int):
