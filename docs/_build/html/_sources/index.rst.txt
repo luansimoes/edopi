@@ -24,7 +24,11 @@ Installation
 
     pip install edopi
 
+.. toctree::
+   :maxdepth: 2
+   :caption: Python API:
 
+   source/api/tonal_system_element
 
 Indices and tables
 ==================
