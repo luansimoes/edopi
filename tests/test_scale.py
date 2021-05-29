@@ -45,14 +45,10 @@ class TestScale(unittest.TestCase):
         f2_result.close()
         f.close()
         f2.close()
-        pass
 
     def test_get_elements(self):
         diatonic = [0, 2, 4, 5, 7, 9, 11]
         self.assertEqual(diatonic, self.s1.get_elements())
-
-    def test_show(self):
-        pass
 
     def test_vector(self):
         diatonic = [0, 2, 4, 5, 7, 9, 11]
@@ -63,6 +59,9 @@ class TestScale(unittest.TestCase):
 
     def test_find_symmetric_rotation(self):
         self.assertEqual(1, self.s1.find_symmetric_rotation())
+    
+    def test_diatonic(self):
+        pass
 
 
 if __name__ == '__main__':
