@@ -35,7 +35,7 @@ class BalzanoDiagram:
 
 
         rotation = self.scale.find_symmetric_rotation()
-        initial = self.scale.elements[rotation] if rotation!=-1 else self.scale.elements[0]
+        initial = self.scale._elements[rotation] if rotation!=-1 else self.scale._elements[0]
         init_pos = (initial*gen.inverse()).pitch_class
         coords = (init_pos%x.subgroup(), init_pos%y.subgroup())
         for i in range(coords[0], coords[0]+dims[0]):
@@ -52,7 +52,7 @@ class BalzanoDiagram:
         dims = [x.subgroup()+1, y.subgroup()+1]
 
         rotation = self.scale.find_symmetric_rotation()
-        initial = self.scale.elements[rotation] if rotation!=-1 else self.scale.elements[0]
+        initial = self.scale._elements[rotation] if rotation!=-1 else self.scale._elements[0]
         init_pos = (initial*gen.inverse()).pitch_class
         coords = (init_pos%x.subgroup(), init_pos%y.subgroup())
 

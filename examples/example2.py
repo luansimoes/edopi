@@ -1,7 +1,7 @@
 from edopi import TonalSystem
 
 system = TonalSystem(27)
-generators = system.get_generators()
+generators = system.generators
 for gen in generators[1:-1]:
     system.set_generator(gen)
     x = int(gen/2)

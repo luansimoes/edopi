@@ -10,14 +10,14 @@ class TestTonalSystem(unittest.TestCase):
     
     def test_get_generators(self):
         gens = [1, 5, 7, 11]
-        self.assertEqual(gens, self.t1.get_generators())
+        self.assertEqual(gens, self.t1.generators)
     
     def test_set_generator(self):
         self.t1.set_generator(7)
-        self.assertEqual(TonalSystemElement(7, 12), self.t1.generator)
+        self.assertEqual(7, self.t1.generator)
 
         self.t1.set_generator(TonalSystemElement(7, self.t1.cardinality))
-        self.assertEqual(TonalSystemElement(7, 12), self.t1.generator)
+        self.assertEqual(7, self.t1.generator)
     
     def test_scale(self):
         new_scale = self.t1.scale(self.diatonic_values)
@@ -29,11 +29,11 @@ class TestTonalSystem(unittest.TestCase):
     
     def test_chromatic_scale(self):
         result = self.t1.chromatic_scale()
-        self.assertTrue(result.is_chromatic())
+        self.assertTrue(result.is_chromatic)
 
     def test_get_midi_pitch_classes(self):
         midi_pitches = [i for i in range(12)]
-        self.assertEqual(midi_pitches, self.t1.get_midi_pitch_classes())
+        self.assertEqual(midi_pitches, self.t1.midi_pitch_classes)
     
     def test_midi_pitch(self):
         self.assertEqual(7, self.t1.midi_pitch(7))

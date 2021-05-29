@@ -15,12 +15,11 @@ class TestScale(unittest.TestCase):
         self.assertEqual(elements, self.s1.build_elements(0))
 
     def test_set_tonic(self):
-        diatonic = [0, 2, 4, 5, 7, 9, 11]
-        elements = [TonalSystemElement(e, 12) for e in diatonic]
-        self.assertEqual(elements, self.s1.elements)
-        elements = [TonalSystemElement(e + 3, 12) for e in diatonic]
+        exp = [0, 2, 4, 5, 7, 9, 11]
+        self.assertEqual(exp, self.s1.elements)
+        exp = [3, 5, 7, 8, 10, 0, 2]
         self.s1.set_tonic(3)
-        self.assertEqual(elements, self.s1.elements)
+        self.assertEqual(exp, self.s1.elements)
 
     def test_next(self):
         re = TonalSystemElement(2, 12)
@@ -48,21 +47,18 @@ class TestScale(unittest.TestCase):
 
     def test_get_elements(self):
         diatonic = [0, 2, 4, 5, 7, 9, 11]
-        self.assertEqual(diatonic, self.s1.get_elements())
+        self.assertEqual(diatonic, self.s1.elements)
 
     def test_vector(self):
-        diatonic = [0, 2, 4, 5, 7, 9, 11]
-        elements = [TonalSystemElement(e, 12) for e in diatonic]
-        self.s1.elements = elements
-        vector_int = [2, 5, 4, 3, 6, 1]
-        self.assertEqual(vector_int, self.s1.vector())
+        exp = [2, 5, 4, 3, 6, 1]
+        self.assertEqual(exp, self.s1.vector())
 
     def test_find_symmetric_rotation(self):
         self.assertEqual(1, self.s1.find_symmetric_rotation())
     
     def test_is_chromatic(self):
         s = Scale(12, tuple([1] * 12))
-        self.assertTrue(s.is_chromatic())
+        self.assertTrue(s.is_chromatic)
     
     # TODO: test
     def test_diatonic(self):

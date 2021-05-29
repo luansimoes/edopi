@@ -27,9 +27,21 @@ class Scale:
         self.system_size = system_size
         self.interval_struct = interval_struct
         self.tonic = tonic
-        self.elements = self.build_elements(tonic)
+        self._elements = self.build_elements(tonic)
         self.name = name
         self.interval_vector = self.vector()
+
+    @property
+    def midi_pitch_classes(self):
+        return [e.midi for e in self._elements]
+
+    @property
+    def elements(self):
+        return [e.pitch_class for e in self._elements]
+    
+    @property
+    def is_chromatic(self):
+        return len(self)==self.system_size
     
     def build_elements(self, tonic: int):
         elements = []
@@ -41,7 +53,7 @@ class Scale:
 
     def set_tonic(self, tonic: int):
         self.tonic = tonic
-        self.elements = self.build_elements(tonic)
+        self._elements = self.build_elements(tonic)
 
     # TODO use central note if element doesnt belong to scale
     def next(self, elem: int, steps: int):
@@ -52,12 +64,12 @@ class Scale:
             real_elem = elem
             octave = 0
 
-        next_index = (self.elements.index(real_elem) + steps) % len(self.elements)
-        if steps > 0 and self.elements[next_index].pitch_class < real_elem.pitch_class:
+        next_index = (self._elements.index(real_elem) + steps) % len(self._elements)
+        if steps > 0 and self._elements[next_index].pitch_class < real_elem.pitch_class:
             octave += 1
-        elif steps < 0 and self.elements[next_index].pitch_class > real_elem.pitch_class:
+        elif steps < 0 and self._elements[next_index].pitch_class > real_elem.pitch_class:
             octave -= 1
-        return self.elements[next_index].pitch_class + (octave * self.system_size)
+        return self._elements[next_index].pitch_class + (octave * self.system_size)
 
     # TODO: usar algoritmo de Manacher para otimizar
     def find_symmetric_rotation(self):
@@ -75,7 +87,7 @@ class Scale:
         f = open(f'scala_files/{file_name}', 'w')
 
         # Headers
-        f.write(f'! {file_name}\n!\n {self.name}\n {len(self.elements)}\n!')
+        f.write(f'! {file_name}\n!\n {self.name}\n {len(self)}\n!')
 
         sum_interval = 0
         for interval in self.interval_struct:
@@ -88,12 +100,12 @@ class Scale:
         kbm = open(f'scala_files/{kbm_name}', 'w')
 
         if kbm_pattern == None:
-            kbm_pattern = [i for i in range(len(self.elements))]
+            kbm_pattern = [i for i in range(len(self))]
 
         if len(kbm_pattern) <= 12:
             length = 12
             kbm.write(
-                f'! {kbm_name}\n{length}\n{0}\n{127}\n{60 + self.elements[0].pitch_class}\n{69}\n440.00000\n{len(self.elements)}\n')
+                f'! {kbm_name}\n{length}\n{0}\n{127}\n{60 + self._elements[0].pitch_class}\n{69}\n440.00000\n{len(self._elements)}\n')
             kbm.write('! Mapping.')
             for e in (kbm_pattern + ['x' for _ in range(12 - len(kbm_pattern))]):
                 kbm.write(f'\n{e}')
@@ -101,7 +113,7 @@ class Scale:
         else:
             length = len(kbm_pattern)
             kbm.write(
-                f'! {kbm_name}\n{length}\n{0}\n{127}\n{60 + self.elements[0].pitch_class}\n{69}\n440.00000\n{len(self.elements)}\n')
+                f'! {kbm_name}\n{length}\n{0}\n{127}\n{60 + self._elements[0].pitch_class}\n{69}\n440.00000\n{len(self)}\n')
             kbm.write('! Mapping.')
             for e in kbm_pattern:
                 kbm.write(f'\n{e}')
@@ -129,7 +141,7 @@ class Scale:
         x_line = []
         y_line = []
         #        for i in range(self.system_size):
-        for i in self.elements:
+        for i in self._elements:
             x_line.append(x[i.pitch_class])
             y_line.append(y[i.pitch_class])
             plt.text(x[i.pitch_class], y[i.pitch_class], i.pitch_class, ha='center', va='center')
@@ -145,21 +157,12 @@ class Scale:
 
     def vector(self):
         v = [0 for _ in range(int(self.system_size / 2))]
-        scale = self.elements
+        scale = self._elements
         for i, pivot in enumerate(scale):
             for el in scale[i + 1:]:
                 dist = min((el - pivot).pitch_class % self.system_size, (pivot - el).pitch_class % self.system_size)
                 v[dist - 1] += 1
         return v
-
-    def get_midi_pitch_classes(self):
-        return [e.midi for e in self.elements]
-
-    def get_elements(self):
-        return [e.pitch_class for e in self.elements]
-    
-    def is_chromatic(self):
-        return len(self.elements)==self.system_size
 
     def __eq__(self, o):
         if not isinstance(o, Scale):
@@ -167,11 +170,11 @@ class Scale:
         return (self.interval_struct == o.interval_struct) and (self.system_size == o.system_size)
 
     def __len__(self):
-        return len(self.elements)
+        return len(self._elements)
 
     def __str__(self):
         output_str = self.name
-        output_str += f'\nElements: {[e.pitch_class for e in self.elements]}'
+        output_str += f'\nElements: {[e.pitch_class for e in self._elements]}'
         output_str += f'\nInterval Vector: {self.interval_vector}'
         output_str += f'\nInterval Struct: {self.interval_struct}\n'
         return output_str
@@ -203,6 +206,6 @@ class DiatonicScale(Scale):
         self.interval_struct = interval_struct
         self.tonic = tonic
         self.generator = generator
-        self.elements = self.build_elements(tonic)
+        self._elements = self.build_elements(tonic)
         self.name = name
         self.interval_vector = self.vector()

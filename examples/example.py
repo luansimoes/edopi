@@ -7,7 +7,7 @@ z.set_generator(11)
 diatonic = z.diatonic_scale()
 midi_classes = diatonic.get_elements() #[0, 2, 4, 6, 8, 9, 11, 13, 15, 17, 19]
 
-midi_pitches = diatonic.get_midi_pitch_classes() #[0, 0.6, 1.2, 1.8, 2.4, 3.0, ..., 11.4]
+midi_pitches = diatonic.midi_pitch_classes #[0, 0.6, 1.2, 1.8, 2.4, 3.0, ..., 11.4]
 
 central_note = 100
 

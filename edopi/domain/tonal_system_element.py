@@ -20,7 +20,7 @@ class TonalSystemElement:
         self.cents = self.pitch_class * (1200/self.module)
         self.midi = (self.cents/100)
     
-    # TODO: make property
+    @property
     def is_generator(self):
         return math.gcd(self.pitch_class, self.module)==1
 
@@ -42,7 +42,7 @@ class TonalSystemElement:
     def __truediv__(self, o):
         assert isinstance(o, TonalSystemElement), f"Cannot divide TonalSystemElement to {type(o)}"
         assert self.module == o.module, "Cannot divide elements of different modules"
-        assert o.is_generator(), "Cannot divide by a zero-divisor element"
+        assert o.is_generator, "Cannot divide by a zero-divisor element"
         return self * o.inverse()
 
     def __eq__(self, o):
