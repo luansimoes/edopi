@@ -37,11 +37,6 @@ class TonalSystem:
     def generator(self, value):
         self.set_generator(value)
 
-    @property
-    def midi_pitch_classes(self):
-        n = self.cardinality
-        return [TonalSystemElement(i, n).midi for i in range(n)]
-
     def set_generator(self, g: Union[TonalSystemElement, int]):
         if isinstance(g, int):
             assert math.gcd(g, self.cardinality)==1, "Element must be a generator"
@@ -71,6 +66,7 @@ class TonalSystem:
         struct = tuple([1 for _ in range(self.cardinality)])
         return Scale(self.cardinality, struct, name=f'{self.cardinality}EDO Chromatic Scale')
 
+    # TODO: Figure out another way to do this
     def midi_pitch(self, pitch_class: int, oct=0):
         oct+=2
         if oct==2:
