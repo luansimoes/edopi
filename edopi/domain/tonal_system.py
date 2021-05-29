@@ -40,6 +40,10 @@ class TonalSystem:
 
     def diatonic_scale(self):
         return self.cycle.diatonic_scale(0)
+    
+    def chromatic_scale(self):
+        struct = tuple([1 for _ in range(self.cardinality)])
+        return Scale(self.cardinality, struct, name=f'{self.cardinality}EDO Chromatic Scale')
 
     def get_generators(self):
         n = self.cardinality

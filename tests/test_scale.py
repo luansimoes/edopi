@@ -60,6 +60,11 @@ class TestScale(unittest.TestCase):
     def test_find_symmetric_rotation(self):
         self.assertEqual(1, self.s1.find_symmetric_rotation())
     
+    def test_is_chromatic(self):
+        s = Scale(12, tuple([1] * 12))
+        self.assertTrue(s.is_chromatic())
+    
+    # TODO: test
     def test_diatonic(self):
         pass
 

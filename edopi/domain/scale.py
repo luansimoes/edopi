@@ -157,6 +157,9 @@ class Scale:
 
     def get_elements(self):
         return [e.pitch_class for e in self.elements]
+    
+    def is_chromatic(self):
+        return len(self.elements)==self.system_size
 
     def __eq__(self, o):
         if not isinstance(o, Scale):

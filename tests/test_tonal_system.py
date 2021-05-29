@@ -26,6 +26,10 @@ class TestTonalSystem(unittest.TestCase):
     def test_diatonic_scale(self):
         self.t1.set_generator(7)
         self.assertEqual(Scale(12, self.diatonic_struct), self.t1.diatonic_scale())
+    
+    def test_chromatic_scale(self):
+        result = self.t1.chromatic_scale()
+        self.assertTrue(result.is_chromatic())
 
     def test_get_midi_pitch_classes(self):
         midi_pitches = [i for i in range(12)]
