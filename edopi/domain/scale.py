@@ -29,7 +29,7 @@ class Scale:
         self.tonic = tonic
         self._elements = self.build_elements(tonic)
         self.name = name
-        self.interval_vector = self.vector()
+        self._interval_vector = None
 
     @property
     def midi_pitch_classes(self):
@@ -42,6 +42,13 @@ class Scale:
     @property
     def is_chromatic(self):
         return len(self)==self.system_size
+    
+    @property
+    def interval_vector(self):
+        if self._interval_vector==None:
+            self._interval_vector = self.vector()
+
+        return self._interval_vector
     
     def build_elements(self, tonic: int):
         elements = []
@@ -208,4 +215,4 @@ class DiatonicScale(Scale):
         self.generator = generator
         self._elements = self.build_elements(tonic)
         self.name = name
-        self.interval_vector = self.vector()
+        self._interval_vector = None
