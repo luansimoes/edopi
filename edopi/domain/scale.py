@@ -209,10 +209,5 @@ class DiatonicScale(Scale):
     :type name: str
     """
     def __init__(self, system_size: int, interval_struct: tuple, generator : TonalSystemElement, tonic=0, name="Diatonic Scale"):
-        self.system_size = system_size
-        self.interval_struct = interval_struct
-        self.tonic = tonic
         self.generator = generator
-        self._elements = self.build_elements(tonic)
-        self.name = name
-        self._interval_vector = None
+        super().__init__(system_size, interval_struct, tonic, name)
