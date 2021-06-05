@@ -1,8 +1,8 @@
 ===================
-TonalSystemElement
+Chroma
 ===================
 
-.. currentmodule:: edopi.TonalSystemElement
+.. currentmodule:: edopi.Chroma
 
-.. autoclass:: edopi.TonalSystemElement
+.. autoclass:: edopi.Chroma
     :members:

@@ -1,5 +1,5 @@
 import  unittest
-from edopi import TonalSystem, TonalSystemElement, Scale
+from edopi import TonalSystem, Chroma, Scale
 
 class TestTonalSystem(unittest.TestCase):
         
@@ -16,7 +16,7 @@ class TestTonalSystem(unittest.TestCase):
         self.t1.set_generator(7)
         self.assertEqual(7, self.t1.generator)
 
-        self.t1.set_generator(TonalSystemElement(7, self.t1.cardinality))
+        self.t1.set_generator(Chroma(7, self.t1.cardinality))
         self.assertEqual(7, self.t1.generator)
     
     def test_scale(self):

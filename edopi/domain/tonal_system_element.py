@@ -1,6 +1,6 @@
 import math
 
-class TonalSystemElement:
+class Chroma:
     """
     Instantiate a Tonal System Element.
     Elements must have a chroma defined in a System. 
@@ -25,40 +25,40 @@ class TonalSystemElement:
         return math.gcd(self.pitch_class, self.module)==1
 
     def __add__(self, o):
-        assert isinstance(o, TonalSystemElement), f"Cannot add TonalSystemElement to {type(o)}"
+        assert isinstance(o, Chroma), f"Cannot add Chroma to {type(o)}"
         assert self.module == o.module, "Cannot add elements of different modules"
-        return TonalSystemElement(self.pitch_class + o.pitch_class, self.module)
+        return Chroma(self.pitch_class + o.pitch_class, self.module)
 
     def __sub__(self, o):
-        assert isinstance(o, TonalSystemElement), f"Cannot subtract TonalSystemElement to {type(o)}"
+        assert isinstance(o, Chroma), f"Cannot subtract Chroma to {type(o)}"
         assert self.module == o.module, "Cannot subtract elements of different modules"
-        return TonalSystemElement(self.pitch_class - o.pitch_class, self.module)
+        return Chroma(self.pitch_class - o.pitch_class, self.module)
 
     def __mul__(self, o):
-        assert isinstance(o, TonalSystemElement), f"Cannot multiply TonalSystemElement to {type(o)}"
+        assert isinstance(o, Chroma), f"Cannot multiply Chroma to {type(o)}"
         assert self.module == o.module, "Cannot multiply elements of different modules"
-        return TonalSystemElement(self.pitch_class * o.pitch_class, self.module)
+        return Chroma(self.pitch_class * o.pitch_class, self.module)
     
     def __truediv__(self, o):
-        assert isinstance(o, TonalSystemElement), f"Cannot divide TonalSystemElement to {type(o)}"
+        assert isinstance(o, Chroma), f"Cannot divide Chroma to {type(o)}"
         assert self.module == o.module, "Cannot divide elements of different modules"
         assert o.is_generator, "Cannot divide by a zero-divisor element"
         return self * o.inverse()
 
     def __eq__(self, o):
-        return isinstance(o, TonalSystemElement) and self.pitch_class == o.pitch_class and self.module == o.module
+        return isinstance(o, Chroma) and self.pitch_class == o.pitch_class and self.module == o.module
 
     def __gt__(self, o):
-        return isinstance(o, TonalSystemElement) and (self.pitch_class > o.pitch_class) and self.module == o.module
+        return isinstance(o, Chroma) and (self.pitch_class > o.pitch_class) and self.module == o.module
 
     def __lt__(self, o):
-        return isinstance(o, TonalSystemElement) and self.pitch_class < o.pitch_class and self.module == o.module
+        return isinstance(o, Chroma) and self.pitch_class < o.pitch_class and self.module == o.module
 
     def __le__(self, o):
-        return isinstance(o, TonalSystemElement) and self.pitch_class <= o.pitch_class and self.module == o.module
+        return isinstance(o, Chroma) and self.pitch_class <= o.pitch_class and self.module == o.module
 
     def __ge__(self, o):
-        return isinstance(o, TonalSystemElement) and self.pitch_class >= o.pitch_class and self.module == o.module
+        return isinstance(o, Chroma) and self.pitch_class >= o.pitch_class and self.module == o.module
 
     def inverse(self):
         if math.gcd(self.pitch_class, self.module) != 1:
@@ -66,10 +66,10 @@ class TonalSystemElement:
         else:
             for i in range(self.module):
                 if (i * self.pitch_class) % self.module == 1:
-                    return TonalSystemElement(i, self.module)
+                    return Chroma(i, self.module)
 
     def symmetrical(self):
-        return TonalSystemElement(-self.pitch_class, self.module)
+        return Chroma(-self.pitch_class, self.module)
 
     def subgroup(self):
         i = 1

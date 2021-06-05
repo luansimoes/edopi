@@ -1,4 +1,4 @@
-from .tonal_system_element import TonalSystemElement
+from .tonal_system_element import Chroma
 from .utils import check_or_create_folder
 import numpy as np
 import matplotlib.pyplot as plt
@@ -54,7 +54,7 @@ class Scale:
         elements = []
         actual = tonic
         for i in self.interval_struct:
-            elements.append(TonalSystemElement(actual, self.system_size))
+            elements.append(Chroma(actual, self.system_size))
             actual += i
         return elements
 
@@ -65,7 +65,7 @@ class Scale:
     # TODO use central note if element doesnt belong to scale
     def next(self, elem: int, steps: int):
         if isinstance(elem, int):
-            real_elem = TonalSystemElement(elem, self.system_size)
+            real_elem = Chroma(elem, self.system_size)
             octave = int(elem // self.system_size)
         else:
             real_elem = elem
@@ -200,7 +200,7 @@ class DiatonicScale(Scale):
     :type interval_struct: tuple
 
     :param generator: The generator of the GCycle from which the scale was built.
-    :type generator: TonalSystemElement
+    :type generator: Chroma
 
     :param tonic: the first element of the scale.
     :type tonic: int
@@ -208,6 +208,6 @@ class DiatonicScale(Scale):
     :param name: The name of the scale.
     :type name: str
     """
-    def __init__(self, system_size: int, interval_struct: tuple, generator : TonalSystemElement, tonic=0, name="Diatonic Scale"):
+    def __init__(self, system_size: int, interval_struct: tuple, generator : Chroma, tonic=0, name="Diatonic Scale"):
         self.generator = generator
         super().__init__(system_size, interval_struct, tonic, name)

@@ -1,1 +1,1 @@
-from .domain import TonalSystem, Scale, GCycle, BalzanoDiagram, TonalSystemElement, transpose_to_octave
+from .domain import TonalSystem, Scale, GCycle, BalzanoDiagram, Chroma, transpose_to_octave

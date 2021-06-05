@@ -1,4 +1,4 @@
-from .tonal_system_element import TonalSystemElement
+from .tonal_system_element import Chroma
 from .gcycle import GCycle
 import matplotlib.pyplot as plt
 import numpy as np
@@ -13,12 +13,12 @@ class BalzanoDiagram:
     :type system_size: int
 
     :param x: The smaller generator.
-    :type x: TonalSystemElement
+    :type x: Chroma
 
     :param y: The bigger generator.
-    :type y: TonalSystemElement.
+    :type y: Chroma.
     """
-    def __init__(self, system_size: int, x: TonalSystemElement, y: TonalSystemElement):
+    def __init__(self, system_size: int, x: Chroma, y: Chroma):
         self.system_size = system_size
         self.generator = x+y
         self.thirds = (x, y)
@@ -27,7 +27,7 @@ class BalzanoDiagram:
         self.compact_matrix = self.build_compact_matrix(system_size, x, y)
         self.dims = (len(self.matrix), len(self.matrix[0]))
 
-    def build_compact_matrix(self, system_size: int, x: TonalSystemElement, y: TonalSystemElement):
+    def build_compact_matrix(self, system_size: int, x: Chroma, y: Chroma):
         matrix = []
         gen = x+y
         #TODO: classe subgrupo??
@@ -41,11 +41,11 @@ class BalzanoDiagram:
         for i in range(coords[0], coords[0]+dims[0]):
             row = []
             for j in range(coords[1], coords[1]+dims[1]):
-                row.append(TonalSystemElement(i*x.pitch_class + j*y.pitch_class, system_size))
+                row.append(Chroma(i*x.pitch_class + j*y.pitch_class, system_size))
             matrix.append(row)
         return matrix
 
-    def build_matrix(self, system_size: int, x: TonalSystemElement, y: TonalSystemElement):
+    def build_matrix(self, system_size: int, x: Chroma, y: Chroma):
         matrix = []
         gen = x+y
         #TODO: classe subgrupo??
@@ -59,7 +59,7 @@ class BalzanoDiagram:
         for i in range(coords[0], coords[0]+dims[0]):
             row = []
             for j in range(coords[1], coords[1]+dims[1]):
-                row.append(TonalSystemElement(i*x.pitch_class + j*y.pitch_class, system_size))
+                row.append(Chroma(i*x.pitch_class + j*y.pitch_class, system_size))
             matrix.append(row)
         return matrix
 

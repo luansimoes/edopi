@@ -1,6 +1,6 @@
 import unittest
 
-from edopi import TonalSystemElement, Scale, TonalSystem
+from edopi import Chroma, Scale, TonalSystem
 
 
 class TestScale(unittest.TestCase):
@@ -11,7 +11,7 @@ class TestScale(unittest.TestCase):
     
     def test_build_elements(self):
         diatonic = [0, 2, 4, 5, 7, 9, 11]
-        elements = [TonalSystemElement(e, 12) for e in diatonic]
+        elements = [Chroma(e, 12) for e in diatonic]
         self.assertEqual(elements, self.s1.build_elements(0))
 
     def test_set_tonic(self):
@@ -22,7 +22,7 @@ class TestScale(unittest.TestCase):
         self.assertEqual(exp, self.s1.elements)
 
     def test_next(self):
-        re = TonalSystemElement(2, 12)
+        re = Chroma(2, 12)
         self.assertEqual(re.pitch_class, self.s1.next(0, 1))
 
     def test_export_scala_files(self):

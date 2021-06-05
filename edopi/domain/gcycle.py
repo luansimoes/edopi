@@ -1,4 +1,4 @@
-from .tonal_system_element import TonalSystemElement
+from .tonal_system_element import Chroma
 from .scale import DiatonicScale
 from typing import Union
 import copy
@@ -12,10 +12,10 @@ class GCycle:
     In most cases, there's no need to interact directly with this class.
     
     :param generator: The generator of the Cycle.
-    :type g: TonalSystemElement
+    :type g: Chroma
     """
 
-    def __init__(self, generator: TonalSystemElement):
+    def __init__(self, generator: Chroma):
         assert generator.is_generator, 'GCycle must be initialized with a element that is a generator of the given system'
         self.generator = generator
         self.system_size = self.generator.module
@@ -23,7 +23,7 @@ class GCycle:
         #self.scale_sizes = sorted([self.generator.inverse().pitch_class, self.generator.inverse().symmetrical().pitch_class])
 
     def generate_cycle(self):
-        elements = [TonalSystemElement(0, self.system_size)]
+        elements = [Chroma(0, self.system_size)]
         for _ in range(self.system_size - 1):
             elements.append(elements[-1] + self.generator)
         return elements
@@ -33,7 +33,7 @@ class GCycle:
     def diatonic_scale(self, tonic: int):
         length = self.generator.inverse().pitch_class
 
-        start_element = TonalSystemElement(-self.generator.pitch_class, self.system_size)
+        start_element = Chroma(-self.generator.pitch_class, self.system_size)
         
         sc_elements = [start_element]
         for _ in range(length-1):
@@ -46,8 +46,8 @@ class GCycle:
         return DiatonicScale(self.system_size, struct, self.generator, tonic=tonic, name="Diatonic Scale")
 
     # TODO: return integer if elem is an integer
-    def next(self, elem: Union[TonalSystemElement, int], steps: int):
-        real_elem = TonalSystemElement(elem, self.system_size) if isinstance(elem, int) else elem
+    def next(self, elem: Union[Chroma, int], steps: int):
+        real_elem = Chroma(elem, self.system_size) if isinstance(elem, int) else elem
         next_index = (self.elements.index(real_elem) + steps) % len(self.elements)
         return copy.deepcopy(self.elements[next_index])
 
