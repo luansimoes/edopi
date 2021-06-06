@@ -132,6 +132,7 @@ class Scale:
         g = Chroma(generator, self.system_size)
         assert g.is_generator, 'Element must be a generator of the Group'
 
+        #size of the cycle
         size = len(self) if as_subgroup else self.system_size
 
         r = 5
@@ -147,29 +148,35 @@ class Scale:
         circle = plt.Circle((0, 0), r, fill=False)
         axes.add_artist(circle)
 
+        # plotting sequential lines and white circles behind text 
         x_line = []
         y_line = []
         x_circles = []
         y_circles = []
 
+        # set the universe of elements (system elements or scale elements)
         use_all = write_all and not as_subgroup
         system_elements = [Chroma(i, self.system_size) for i in range(self.system_size)]
         elements = self._elements if not use_all else system_elements
 
+        # ordering elements to get equivalent subgroup position 
         ordered = sorted(elements, key=lambda x:x/g)
 
         for e in elements:
             pos = (e/g).pitch_class if not as_subgroup else ordered.index(e)
 
+            # all elements have white circles and text
             x_circles.append(x[pos])
             y_circles.append(y[pos])
+            plt.text(x[pos], y[pos], e.pitch_class, ha='center', va='center')
+
             if e in self._elements:
+                # only scale elements are linked by lines
                 x_line.append(x[pos])
                 y_line.append(y[pos])
-                plt.text(x[pos], y[pos], e.pitch_class, ha='center', va='center')
-            else:
-                plt.text(x[pos], y[pos], e.pitch_class, ha='center', va='center')
+                
 
+        # plotting
         x_line.append(x[0])
         y_line.append(y[0])
         plt.plot(x_line, y_line, markersize=20)
