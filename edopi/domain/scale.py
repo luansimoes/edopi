@@ -128,7 +128,7 @@ class Scale:
 
         kbm.close()
 
-    def show(self, generator=1):
+    def show(self, generator=1, write_all=False):
         g = Chroma(generator, self.system_size)
         assert g.is_generator, 'Element must be a generator of the Group'
 
@@ -141,25 +141,33 @@ class Scale:
             x.append(r * np.sin(i * angle))
             y.append(r * np.cos(i * angle))
 
-        # plt.plot(x, y, 'wo', markersize=20)
-
         figure, axes = plt.subplots()
         circle = plt.Circle((0, 0), r, fill=False)
         axes.add_artist(circle)
 
         x_line = []
         y_line = []
+        x_circles = []
+        y_circles = []
 
-        for e in self._elements:
+        system_elements = [Chroma(i, self.system_size) for i in range(self.system_size)]
+        elements = self._elements if not write_all else system_elements
+
+        for e in elements:
             pos = (e/g).pitch_class
-            x_line.append(x[pos])
-            y_line.append(y[pos])
-            plt.text(x[pos], y[pos], e.pitch_class, ha='center', va='center')
+            x_circles.append(x[pos])
+            y_circles.append(y[pos])
+            if e in self._elements:
+                x_line.append(x[pos])
+                y_line.append(y[pos])
+                plt.text(x[pos], y[pos], e.pitch_class, ha='center', va='center')
+            else:
+                plt.text(x[pos], y[pos], e.pitch_class, ha='center', va='center')
 
         x_line.append(x[0])
         y_line.append(y[0])
         plt.plot(x_line, y_line, markersize=20)
-        plt.plot(x_line, y_line, 'wo', markersize=20)
+        plt.plot(x_circles, y_circles, 'wo', markersize=20)
         plt.axis('equal')
         plt.axis('off')
 
