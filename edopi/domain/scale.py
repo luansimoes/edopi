@@ -128,16 +128,18 @@ class Scale:
 
         kbm.close()
 
-    def show(self, generator=1, write_all=False):
+    def show(self, generator=1, write_all=False, as_subgroup=False):
         g = Chroma(generator, self.system_size)
         assert g.is_generator, 'Element must be a generator of the Group'
 
+        size = len(self) if as_subgroup else self.system_size
+
         r = 5
-        angle = 2 * np.pi / self.system_size
+        angle = 2 * np.pi / size
         x = [0]
         y = [r]
 
-        for i in range(1, self.system_size + 1):
+        for i in range(1, size + 1):
             x.append(r * np.sin(i * angle))
             y.append(r * np.cos(i * angle))
 
@@ -150,11 +152,15 @@ class Scale:
         x_circles = []
         y_circles = []
 
+        use_all = write_all and not as_subgroup
         system_elements = [Chroma(i, self.system_size) for i in range(self.system_size)]
-        elements = self._elements if not write_all else system_elements
+        elements = self._elements if not use_all else system_elements
+
+        ordered = sorted(elements, key=lambda x:x/g)
 
         for e in elements:
-            pos = (e/g).pitch_class
+            pos = (e/g).pitch_class if not as_subgroup else ordered.index(e)
+
             x_circles.append(x[pos])
             y_circles.append(y[pos])
             if e in self._elements:
