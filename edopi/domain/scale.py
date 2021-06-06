@@ -1,3 +1,4 @@
+from numpy.lib import math
 from .tonal_system_element import Chroma
 from .utils import check_or_create_folder
 import numpy as np
@@ -127,12 +128,13 @@ class Scale:
 
         kbm.close()
 
-    def show(self):
+    def show(self, generator=1):
+        g = Chroma(generator, self.system_size)
+        assert g.is_generator, 'Element must be a generator of the Group'
+
         r = 5
         angle = 2 * np.pi / self.system_size
-        i = 0
-        ascending_chromatic = [i for i in range(self.system_size)]
-        x = [ascending_chromatic[0]]
+        x = [0]
         y = [r]
 
         for i in range(1, self.system_size + 1):
@@ -142,16 +144,17 @@ class Scale:
         # plt.plot(x, y, 'wo', markersize=20)
 
         figure, axes = plt.subplots()
-        cycle = plt.Circle((0, 0), r, fill=False)
-        axes.add_artist(cycle)
+        circle = plt.Circle((0, 0), r, fill=False)
+        axes.add_artist(circle)
 
         x_line = []
         y_line = []
-        #        for i in range(self.system_size):
-        for i in self._elements:
-            x_line.append(x[i.pitch_class])
-            y_line.append(y[i.pitch_class])
-            plt.text(x[i.pitch_class], y[i.pitch_class], i.pitch_class, ha='center', va='center')
+
+        for e in self._elements:
+            pos = (e/g).pitch_class
+            x_line.append(x[pos])
+            y_line.append(y[pos])
+            plt.text(x[pos], y[pos], e.pitch_class, ha='center', va='center')
 
         x_line.append(x[0])
         y_line.append(y[0])
