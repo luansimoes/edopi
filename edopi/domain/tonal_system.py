@@ -1,5 +1,5 @@
 from .gcycle import GCycle
-from .tonal_system_element import Chroma
+from .chroma import Chroma
 from .scale import Scale
 from .balzano_diagram import BalzanoDiagram
 from typing import Union

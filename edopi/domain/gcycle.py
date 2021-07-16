@@ -1,4 +1,4 @@
-from .tonal_system_element import Chroma
+from .chroma import Chroma
 from .scale import DiatonicScale
 from typing import Union
 import copy

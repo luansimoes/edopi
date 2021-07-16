@@ -1,5 +1,5 @@
 from numpy.lib import math
-from .tonal_system_element import Chroma
+from .chroma import Chroma
 from .utils import check_or_create_folder
 import numpy as np
 import matplotlib.pyplot as plt

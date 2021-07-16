@@ -1,4 +1,4 @@
-from .tonal_system_element import Chroma
+from .chroma import Chroma
 from .gcycle import GCycle
 import matplotlib.pyplot as plt
 import numpy as np
