@@ -198,6 +198,24 @@ class Scale:
                 v[dist - 1] += 1
         return v
 
+
+    #----------------------COMPOSITION METHODS--------------------------
+    def smooth_line(self, base_pitch, line_range, size, max_step=1):
+        low, high = line_range
+        range_size = high-low
+        assert base_pitch>=low and base_pitch<=high, 'base_pitch must be in line_range'
+
+        line = [self.next(base_pitch, 0)]
+        cur_pitch = base_pitch
+        for _ in range(size-1):
+            p = [(cur_pitch-low)/range_size, (high-cur_pitch)/range_size]
+            dir = np.random.choice([-1, 1], p=p)
+            step = np.random.randint(max_step) + 1
+            cur_pitch = self.next(cur_pitch, dir*step)
+            line.append(cur_pitch)
+
+        return line
+
     def __eq__(self, o):
         if not isinstance(o, Scale):
             return False
