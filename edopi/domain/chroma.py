@@ -25,12 +25,16 @@ class Chroma:
         return math.gcd(self.pitch_class, self.module)==1
 
     def __add__(self, o):
-        assert isinstance(o, Chroma), f"Cannot add Chroma to {type(o)}"
+        assert isinstance(o, (Chroma, int)), f"Cannot add Chroma to {type(o)}"
+        if isinstance(o, int): return Chroma(self.pitch_class+o, self.module)
+
         assert self.module == o.module, "Cannot add elements of different modules"
         return Chroma(self.pitch_class + o.pitch_class, self.module)
 
     def __sub__(self, o):
-        assert isinstance(o, Chroma), f"Cannot subtract Chroma to {type(o)}"
+        assert isinstance(o, (Chroma, int)), f"Cannot subtract Chroma to {type(o)}"
+        if isinstance(o, int): return Chroma(self.pitch_class-o, self.module)
+
         assert self.module == o.module, "Cannot subtract elements of different modules"
         return Chroma(self.pitch_class - o.pitch_class, self.module)
 

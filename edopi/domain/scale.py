@@ -63,7 +63,7 @@ class Scale:
         self.tonic = tonic
         self._elements = self.build_elements(tonic)
 
-    # TODO use central note if element doesnt belong to scale
+    # if element doesnt belong to scale it finds the last one that belongs
     def next(self, elem: int, steps: int):
         if isinstance(elem, int):
             real_elem = Chroma(elem, self.system_size)
@@ -72,6 +72,9 @@ class Scale:
             real_elem = elem
             octave = 0
 
+        while real_elem not in self._elements:
+            real_elem -= 1
+        
         next_index = (self._elements.index(real_elem) + steps) % len(self._elements)
         if steps > 0 and self._elements[next_index].pitch_class < real_elem.pitch_class:
             octave += 1

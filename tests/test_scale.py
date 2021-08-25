@@ -24,6 +24,8 @@ class TestScale(unittest.TestCase):
     def test_next(self):
         re = Chroma(2, 12)
         self.assertEqual(re.pitch_class, self.s1.next(0, 1))
+        self.assertEqual(4, self.s1.next(3, 1))
+
 
     def test_export_scala_files(self):
         f = open('tests/test_files/z12_7_test.scl', 'r')
