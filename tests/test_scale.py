@@ -24,6 +24,7 @@ class TestScale(unittest.TestCase):
     def test_next(self):
         re = Chroma(2, 12)
         self.assertEqual(re.pitch_class, self.s1.next(0, 1))
+        self.assertEqual(14, self.s1.next(11, 2))
         self.assertEqual(4, self.s1.next(3, 1))
 
 
