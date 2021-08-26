@@ -227,6 +227,28 @@ class Scale:
         
         return line
 
+    #This is experimental, it should be improved by study
+    def chord_path(self, c1, c2):
+        def distance(n1, n2):
+            return min((n1-n2).pitch_class, (n2-n1).pitch_class)
+        
+        resp = []
+        for n2 in c2:
+            v = []
+            for n1 in c1:
+                v.append(distance(Chroma(n1), Chroma(n2)))
+            short = min(v)
+            resp.append((c1[v.index(short)], n2))
+
+        return resp   
+        # 0, 6, 11    ->    8  13  19
+        # vec = [[8, 7, 1], [2, 7, 7], [3, 2, 8]]
+        # 0, 6, 11    ->    2  8  13
+        # vec = [[2, 8, 7], [4, 2, 7], [11, 3, 2]]
+        # 0, 6, 11    ->    4  9  15
+        # vec = [[4, 9, 5], [2, 3, 9], [7, 2, 4]]
+
+
     def __eq__(self, o):
         if not isinstance(o, Scale):
             return False
