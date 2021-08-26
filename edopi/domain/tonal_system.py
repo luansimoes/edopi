@@ -23,6 +23,7 @@ class TonalSystem:
         self.cardinality = n
         self._generator = Chroma(g, n)
         self.cycle = GCycle(self._generator)
+        self.scale = self.diatonic_scale()
 
     @property
     def generators(self):
@@ -45,6 +46,7 @@ class TonalSystem:
             assert g.is_generator, "Element must be a generator"
             self._generator = g
         self.cycle = GCycle(self._generator)
+        self.scale = self.diatonic_scale()
 
     def scale(self, elements=[], struct=[], name='Generic Scale'):
         assert (len(elements)==0) ^ (len(struct)==0), "argument must be either elements or struct"
@@ -77,6 +79,8 @@ class TonalSystem:
         n = self.cardinality
         assert Chroma(minor+major, n)==self._generator, "thirds must sum up to generator"
         return BalzanoDiagram(n, Chroma(minor, n), Chroma(major, n))
+    
+    #---------------------COMPOSITION METHODS------------------------
 
     def show_gCycle(self):
         self.cycle.show()
