@@ -215,6 +215,17 @@ class Scale:
             line.append(cur_pitch)
 
         return line
+    
+    def composite_line(self, lines, size):
+        lengths = set([len(l) for l in lines])
+        assert len(lengths)==1 and len(lines[0])==size, 'lines should have the same length'
+
+        line = []
+        for i in range(size):
+            l = np.random.randint(len(lines))
+            line.append(lines[l][i])
+        
+        return line
 
     def __eq__(self, o):
         if not isinstance(o, Scale):
