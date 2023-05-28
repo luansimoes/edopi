@@ -27,6 +27,16 @@ class TestScale(unittest.TestCase):
         self.assertEqual(14, self.s1.next(11, 2))
         self.assertEqual(4, self.s1.next(3, 1))
 
+        re3 = 38
+        self.assertEqual(35, self.s1.next(re3, -2))
+        self.assertEqual(40, self.s1.next(re3, 1))
+        self.assertEqual(50, self.s1.next(re3, 7))
+        self.assertEqual(64, self.s1.next(re3, 15))
+        self.assertEqual(26, self.s1.next(re3, -7))
+        self.assertEqual(re3, self.s1.next(37, 1))
+        self.assertEqual(re3, self.s1.next(39, 0))
+
+
 
     def test_export_scala_files(self):
         f = open('tests/test_files/z12_7_test.scl', 'r')

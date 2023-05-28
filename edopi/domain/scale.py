@@ -67,13 +67,18 @@ class Scale:
     def next(self, elem: int, steps: int):
         if isinstance(elem, int):
             real_elem = Chroma(elem, self.system_size)
-            octave = int(elem // self.system_size)
+            octave = int((elem // self.system_size))
         else:
             real_elem = elem
             octave = 0
 
         while real_elem not in self._elements:
+            if octave != 0 and real_elem == 0:
+                octave -= 1
             real_elem -= 1
+        
+        if abs(steps) >= len(self):
+            octave += (steps/abs(steps)) * (abs(steps) // len(self))
         
         next_index = (self._elements.index(real_elem) + steps) % len(self._elements)
         if steps > 0 and self._elements[next_index].pitch_class < real_elem.pitch_class:
